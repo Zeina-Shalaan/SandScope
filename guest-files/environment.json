@@ -1,0 +1,40 @@
+{
+    "collection_time": "2026-11-21T21:23:52.120652+00:00",
+    "operating_system": "Windows-10-10.0.19045-SP0",
+    "computer_name": "DESKTOP-HRL6CVK",
+    "cpu": {
+        "logical_cores": 2
+    },
+    "memory": {
+        "total_gb": 4.0,
+        "available_gb": 2.17
+    },
+    "disk": {
+        "total_gb": 59.35,
+        "free_gb": 38.9
+    },
+    "network_adapters": {
+        "Ethernet0": [
+            "00-0C-29-5E-1D-DE"
+        ]
+    },
+    "virtualization_files": {
+        "C:\\Windows\\System32\\drivers\\VBoxMouse.sys": false,
+        "C:\\Windows\\System32\\drivers\\VBoxGuest.sys": false,
+        "C:\\Windows\\System32\\drivers\\VBoxSF.sys": false,
+        "C:\\Windows\\System32\\drivers\\vmhgfs.sys": true,
+        "C:\\Windows\\System32\\drivers\\vmmouse.sys": true,
+        "C:\\Program Files\\VMware\\VMware Tools": true
+    },
+    "virtualization_registry": {
+        "HARDWARE\\ACPI\\DSDT\\VBOX__": false,
+        "HARDWARE\\ACPI\\FADT\\VBOX__": false,
+        "SOFTWARE\\Oracle\\VirtualBox Guest Additions": false,
+        "SOFTWARE\\VMware, Inc.\\VMware Tools": true
+    },
+    "uptime": {
+        "seconds": 3578,
+        "hours": 0.99
+    },
+    "recent_files_count": 14
+}

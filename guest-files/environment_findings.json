@@ -1,0 +1,34 @@
+[
+    {
+        "id": "VM_REGISTRY_CHECK",
+        "source": "environment",
+        "technique": "T1497.001",
+        "description": "The VM exposes VMware virtualization files, drivers and registry information.",
+        "evidence": "vmhgfs.sys, vmmouse.sys, VMware Tools directory and VMware Tools registry key detected.",
+        "confidence": "low"
+    },
+    {
+        "id": "VM_MAC_CHECK",
+        "source": "environment",
+        "technique": "T1497.001",
+        "description": "The VM network adapter exposes a VMware-associated MAC address prefix.",
+        "evidence": "Ethernet0 MAC address: 00-0C-29-5E-1D-DE.",
+        "confidence": "low"
+    },
+    {
+        "id": "HARDWARE_CHECK",
+        "source": "environment",
+        "technique": "T1497.001",
+        "description": "The VM exposes its hardware resource configuration.",
+        "evidence": "2 logical CPU cores, 4.0 GB RAM and 59.35 GB disk capacity.",
+        "confidence": "low"
+    },
+    {
+        "id": "USER_ACTIVITY_CHECK",
+        "source": "environment",
+        "technique": "T1497.002",
+        "description": "The VM Recent folder contains a measurable number of files.",
+        "evidence": "14 entries detected in the Windows Recent folder.",
+        "confidence": "low"
+    }
+]
