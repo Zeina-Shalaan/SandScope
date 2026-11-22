@@ -1,0 +1,22 @@
+# VMware virtual machines
+*.vmdk
+*.vmx
+*.vmsn
+*.vmsd
+*.nvram
+*.vmxf
+*.vmpl
+*.vmsl
+
+# Python
+__pycache__/
+*.pyc
+
+# Credentials / secrets
+.env
+credentials.txt
+passwords.txt
+
+# Temporary files
+*.tmp
+*.log
