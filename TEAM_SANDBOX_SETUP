@@ -1,0 +1,192 @@
+# SandScope — Windows Sandbox Setup Guide
+
+## 1. Overview
+
+This VM is the Windows analysis environment prepared for the SandScope Security project.
+
+It contains the prepared environment for Person 1's infrastructure and environment-detection work.
+
+**Virtualization:** VMware Workstation Pro
+**Guest OS:** Windows 10
+**Guest account:** analyst
+**Project directory inside VM:** `C:\SandScope`
+
+---
+
+## 2. Requirements
+
+Each teammate needs:
+
+- VMware Workstation Pro
+- The shared SandScope VM archive
+- Adequate free disk space to extract and run the VM
+- A Windows host capable of running the VM
+
+---
+
+## 3. Import the VM
+
+1. Download the VM archive shared.
+2. Extract the archive completely.
+3. Locate the `Sandbox.vmx` file.
+4. Open VMware Workstation.
+5. Select **File > Open**.
+6. Browse to the extracted `Sandbox.vmx`.
+7. Open the VM.
+8. If VMware asks whether the VM was moved or copied, select **I copied it** when creating a separate team member instance.
+
+Do not run the VM directly from inside the compressed archive.
+
+---
+
+## 4. Configure network isolation
+
+Before starting the VM:
+
+1. Select the VM in VMware Workstation.
+2. Open **VM Settings**.
+3. Select **Network Adapter**.
+4. Select **LAN Segment**.
+5. Select the LAN Segment named `sandbox-lan`, this is our isolated network .
+6. Make sure **Connect at power on** is enabled.
+7. Do not select Bridged.
+8. Do not select NAT for analysis sessions.
+9. Do not connect the VM to a normal production or personal network.
+
+### If `sandbox lan` does not exist
+
+VMware LAN Segments are local to a VMware installation and may not be transferred with the VM archive.
+
+On the teammate's computer:
+
+1. Open VMware Workstation.
+2. Go to **Edit > Virtual Network Editor**.
+3. Open the LAN Segments section, if available.
+4. Create a LAN Segment.
+5. Name it `sandbox lan`.
+6. Apply the changes.
+7. Return to the VM settings.
+8. Connect the VM's network adapter to that LAN Segment.
+
+A LAN Segment is intended to isolate connected virtual machines from the host's ordinary network. However, the network configuration should still be verified before analysis. Do not assume that the segment name alone proves isolation.
+
+---
+
+## 5. Isolation settings
+
+Before using the VM, verify:
+
+- Network adapter is connected to the intended LAN Segment.
+- Bridged networking is not selected.
+- NAT is not selected during analysis.
+- Shared Folders are disabled.
+- Clipboard sharing is disabled.
+- Drag-and-drop is disabled.
+- VNC is disabled.
+
+Do not re-enable these features for convenience during sample analysis.
+
+---
+
+## 6. Start the VM
+
+1. Open VMware Workstation.
+2. Select the Sandbox VM.
+3. Start the VM.
+4. Log in using the VM account `analyst`.
+5. Open Command Prompt if required.
+
+The project directory is:
+
+`C:\SandScope`
+
+---
+
+## 7. Project files inside the VM
+
+| File                                    | Purpose                            |
+| --------------------------------------- | ---------------------------------- |
+| `environment\collect_env.py`            | Collects environment information   |
+| `environment\environment.json`          | Stores environment data            |
+| `environment\environment_findings.json` | Stores environment findings        |
+| `environment\validate_baseline.py`      | Validates the prepared environment |
+| `run_validate.bat`                      | Executes baseline validation       |
+| `run_inside.bat`                        | Controlled test runner             |
+
+Tools prepared:
+
+- Procmon
+- capa
+- Sysmon — configuration/ LESA : integration coordinated with Person 2
+
+---
+
+## 8. Baseline validation
+
+Inside the Windows VM:
+
+1. Open Command Prompt.
+2. Run:
+
+```cmd
+C:\SandScope\run_validate.bat
+```
+
+Review the result.
+
+A result of `NOT FULLY VERIFIED` can occur when manual checks or pending integrations, such as Sysmon, remain incomplete.
+
+Do not interpret a pending result as a successful complete baseline.
+
+---
+
+## 9. Recovery
+
+The prepared VM includes a snapshot named:
+
+`SandScope-complete-baseline` => akher haga a wasltha
+
+Use VMware's snapshot manager to restore the baseline when instructed by the team.
+
+Restoring a snapshot can discard changes made after that snapshot. Confirm that any required analysis outputs have been saved separately before restoring.
+
+---
+
+## 10. Safety rules
+
+- Only use instructor-approved samples or explicitly authorized harmless simulators.
+- Do not execute unknown or live malware without instructor approval and a dedicated approved lab.
+- Never connect the sandbox to Bridged networking.
+- Never enable host shared folders or clipboard sharing for sample transfer.
+- Do not store credentials or sensitive host information in the VM.
+- Preserve analysis results separately before restoring snapshots.
+- Verify isolation every time the VM is started for analysis.
+
+---
+
+## 11. Troubleshooting
+
+### VM cannot find the LAN Segment
+
+Create the LAN Segment locally in VMware Virtual Network Editor, then connect the VM to it.
+
+### Baseline validator reports pending checks
+
+Review the report and coordinate pending integrations with the responsible team member.
+
+### VMware asks whether the VM was moved or copied
+
+For a separately shared team copy, select **I copied it**.
+
+### VM fails to start
+
+Verify that the VM archive was fully extracted, that the `.vmx` file exists, and that all virtual disk files are present.
+
+---
+
+## 12. Team repository
+
+Refer to the SandScope GitHub repository for scripts, reports, and implementation documentation.
+
+The VM archive is distributed separately from the GitHub repository.
+
