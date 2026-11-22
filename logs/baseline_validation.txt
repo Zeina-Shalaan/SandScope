@@ -1,0 +1,29 @@
+============================================================
+SandScope - Baseline Validation
+============================================================
+[PASS] Operating system: Windows-10-10.0.19045-SP0
+[PASS] Python version: 3.13.17
+[PASS] Python module: psutil: Available
+[PASS] Python module: pefile: Available
+[PASS] Python module: yara: Available
+[PASS] Python module: jinja2: Available
+[PASS] Environment data: environment.json exists and contains required fields.
+[PASS] Environment findings: environment_findings.json is valid JSON.
+[PASS] Procmon: C:\SandScope\tools\procmon\Procmon64.exe
+[PASS] capa: C:\SandScope\tools\capa\capa.exe
+[PENDING] Sysmon: Executable found. Installation and configuration must be coordinated with Person 2.
+[MANUAL] VMware snapshot: Confirm the VM was restored to the approved clean-baseline snapshot.
+[MANUAL] VMware network isolation: Confirm VMware Network Adapter is connected to the sandbox lan segment, not NAT or Bridged.
+
+============================================================
+VALIDATION SUMMARY
+============================================================
+Passed:  10
+Failed:  0
+Pending: 1
+Manual:  2
+
+RESULT: NOT FULLY VERIFIED - Complete pending and manual checks.
+
+No sample has been executed by this validation script.
+============================================================
