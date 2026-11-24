@@ -1,4 +1,5 @@
-
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -11,13 +12,41 @@ import json
 # Person 1: Infrastructure & Environment
 # ==========================================
 
-VMRUN = Path(
-    r"C:\Program Files\VMware\VMware Workstation\vmrun.exe"
-)
+# ==========================================
+# VMware configuration
+# ==========================================
 
-VMX = Path(
-    r"C:\Users\COMPUDATA\Documents\Virtual Machines\Sandbox\Sandbox.vmx"
-)
+# Automatically locate VMware on each teammate's computer.
+VMRUN_PATH = shutil.which("vmrun")
+
+if VMRUN_PATH is None:
+    possible_paths = [
+        Path(r"C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe"),
+        Path(r"C:\Program Files\VMware\VMware Workstation\vmrun.exe")
+    ]
+
+    for path in possible_paths:
+        if path.is_file():
+            VMRUN_PATH = str(path)
+            break
+
+if VMRUN_PATH is None:
+    raise FileNotFoundError(
+        "Cannot find vmrun.exe. Check VMware Workstation installation."
+    )
+
+VMRUN = Path(VMRUN_PATH)
+
+# Each teammate specifies their own VMX location.
+VMX_VALUE = os.environ.get("SANDSCOPE_VMX")
+
+if not VMX_VALUE:
+    raise RuntimeError(
+        "SANDSCOPE_VMX is not configured. "
+        "Set it to the full path of your Sandbox.vmx file."
+    )
+
+VMX = Path(VMX_VALUE)
 
 SNAPSHOT = "clean-baseline"
 GUEST_USER = "analyst"
